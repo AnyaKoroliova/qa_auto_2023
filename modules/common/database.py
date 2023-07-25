@@ -53,3 +53,16 @@ class Database():
         self.cursor.execute(query)
         record = self.cursor.fetchall()
         return record
+    
+
+    # Individual tests
+    def get_column_types(self, table_name):
+        query = f"PRAGMA TABLE_INFO('{table_name}')"
+        self.cursor.execute(query)
+        record = self.cursor.fetchall()
+        return record
+    
+    def insert_customer_without_name(self, customers_id, address, city):
+        query = f"INSERT OR REPLACE INTO customers (id, address, city) VALUES ({customers_id}, '{address}', '{city}')"
+        self.cursor.execute(query)
+        self.connection.commit()
