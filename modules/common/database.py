@@ -66,3 +66,13 @@ class Database():
         query = f"INSERT OR REPLACE INTO customers (id, address, city) VALUES ({customers_id}, '{address}', '{city}')"
         self.cursor.execute(query)
         self.connection.commit()
+
+    def update_product_qnt_to_text(self, qnt):
+        query = f"INSERT OR REPLACE INTO products (quantity) VALUES ('{qnt}')"
+        self.cursor.execute(query)
+        self.connection.commit()
+    
+    def insert_order(self, order_id, customer_id, product_id, order_date):
+        query = f"INSERT OR REPLACE INTO orders (id, customer_id, product_id, order_date) VALUES ({order_id}, {customer_id}, {product_id}, '{order_date}')"
+        self.cursor.execute(query)
+        self.connection.commit()

@@ -96,9 +96,23 @@ def test_long_int_id():
     insert_error = True
     # Перехоплення виключення
     try:
-        db.insert_products(123456789012345678901, 'цукерка', 'Джек', 0.5)
+        db.insert_order(123456789012345678901, 2, 4, '23:00:00')
     except sqlite3.IntegrityError as e:
         # Перехопили помилку
         insert_error = False
 
     assert insert_error is True
+
+@pytest.mark.database
+def test_update_qnt_to_text():
+    db = Database()
+    got_error = False
+    # Перехоплення виключення
+    try:
+        db.update_product_qnt_to_text('цукерка')
+    except Exception as e:
+        print(str(e))
+        # Перехопили помилку
+        got_error = True
+
+    assert got_error is True
