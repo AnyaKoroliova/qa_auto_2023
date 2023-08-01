@@ -68,7 +68,7 @@ def test_detailed_orders():
 
 
 # Individual tests
-@pytest.mark.database
+@pytest.mark.database_my
 def test_check_column_types():
     db = Database()
     table = db.get_column_types('products')
@@ -76,7 +76,7 @@ def test_check_column_types():
     assert table[0][3] == 1
     assert table[0][5] == 1
 
-@pytest.mark.database
+@pytest.mark.database_my
 def test_check_customers_required_field():
     db = Database()
     # тимчасова зміна для перевірки обов'язкового поля Name
@@ -90,7 +90,7 @@ def test_check_customers_required_field():
 
     assert insert_error is True
 
-@pytest.mark.database
+@pytest.mark.database_my
 def test_long_int_id():
     db = Database()
     insert_error = True
@@ -103,7 +103,7 @@ def test_long_int_id():
 
     assert insert_error is True
 
-@pytest.mark.database
+@pytest.mark.database_my
 def test_update_qnt_to_text():
     db = Database()
     got_error = False

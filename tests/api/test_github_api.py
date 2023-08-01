@@ -32,7 +32,9 @@ def test_repo_with_single_char_be_found(github_api):
     assert r['total_count'] != 0
 
 
-@pytest.mark.api
+
+# Individual Tests for GitHub API
+@pytest.mark.api_my
 def test_create_issue(github_api):
     r1 = github_api.create_issue('AnyaKoroliova', 'qa_auto_2023', data={"title":"Found a bug","body":"I'm having a problem with this.","labels":["bug"]})
     r2 = github_api.create_issue('AnyaKoroliova', 'qa_auto_2023', data={"title":"New bug","body":"Bug or feature.","labels":["feature"]})
@@ -40,14 +42,14 @@ def test_create_issue(github_api):
     assert 'message' not in r2
 
 
-@pytest.mark.api
+@pytest.mark.api_my
 def test_list_of_issues(github_api):
     r = github_api.list_of_issues('AnyaKoroliova', 'qa_auto_2023', 'bug')
     assert len(r) > 0
     assert 'bug' in r[0]['labels'][0]['name']
 
 
-@pytest.mark.api
+@pytest.mark.api_my
 def test_update_issue(github_api):
     r = github_api.list_of_issues('AnyaKoroliova', 'qa_auto_2023', 'bug')
     issue_id = r[0]['number']
@@ -56,7 +58,7 @@ def test_update_issue(github_api):
     assert i['title'] == "Edited issue 3"
 
 
-@pytest.mark.api
+@pytest.mark.api_my
 def test_create_comment(github_api):
     a = github_api.list_of_commit('AnyaKoroliova', 'qa_auto_2023')
     assert 'message' not in a
@@ -66,7 +68,7 @@ def test_create_comment(github_api):
     assert b['body'] == "test comment 2"
 
 
-@pytest.mark.api
+@pytest.mark.api_my
 def test_delete_comment(github_api):
     r = github_api.delete_comment('AnyaKoroliova', 'qa_auto_2023', 999)
     body = r.json()

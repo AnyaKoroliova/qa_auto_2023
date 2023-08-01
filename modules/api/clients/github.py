@@ -1,10 +1,10 @@
 from importlib.metadata import requires
-import re
+import os
 import requests
 
 class GitHub:
 
-    hdrs = {"Accept": "application/vnd.github+json", "Authorization": "Bearer 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"}
+    hdrs = {"Accept": "application/vnd.github+json", "Authorization": f"Bearer {os.environ.get('GITHUB_TOKEN', None)}"}
 
     def get_user(self, username):
         r = requests.get(f'https://api.github.com/users/{username}')
@@ -19,7 +19,9 @@ class GitHub:
         body = r.json()
 
         return body
-    
+
+
+    # Individual Tests for GitHub API
     def create_issue(self, owner, repo, data):
         r = requests.post(f"https://api.github.com/repos/{owner}/{repo}/issues",
                          headers=self.hdrs,
